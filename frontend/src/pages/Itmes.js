@@ -4,28 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table,Button,Form,InputGroup} from 'react-bootstrap';
 import axios from 'axios';
 import MyVerticallyCenteredModal from './Modal';
-
-
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'No', width: 150 },
-  { field: 'companyName', headerName: '회사', width: 150 },
-  { field: 'itemCode', headerName: '품목코드', width: 150 },
-  { field: 'itemName', headerName: '품목명', width: 150 },
-  { field: 'itemType', headerName: '품목유형', width: 150 },
-  { field: 'partNumber', headerName: 'P/N', width: 150 },
-  { field: 'itemGroup', headerName: '품목군', width: 150 },
-  { field: 'standard', headerName: '규격', width: 150 },
-  { field: 'receiptPaymentUnit', headerName: '수불단위', width: 150 },
-  { field: 'purchaseUnit', headerName: '매입단위', width: 150 },
-  { field: 'purchaseUnitQuantity', headerName: '매입단위수량', width: 150 },
-  { field: 'requiredUnit', headerName: '소요단위', width: 150 },
-  { field: 'requiredUnitQuantity', headerName: '소요단위수량', width: 150 },
-  { field: 'yieldUnit', headerName: '수율단위', width: 150 },
-  { field: 'yieldUnitQuantity', headerName: '수율단위수량', width: 150 },
-];
-
+import UpdateModal from './UpdateModal';
+import DeleteModal from './DeleteModal';
 
 function Items() {
+
   const [items, setItems] = useState([])
 
   const [companyList, setCompanyList] = useState([])
@@ -37,6 +20,9 @@ function Items() {
   const [itemGroup, setItemGroup] = useState("")
 
   const [modalShow, setModalShow] = useState(false);
+
+  const [updatemodalShow, setUpdateModalShow] = useState(false);
+  const [deletemodalShow, setDeleteModalShow] = useState(false);
 
   const handleCompanyName = (e) => {
     setCompanyName(e.target.value);
@@ -96,6 +82,58 @@ function Items() {
       .get(`api/items/${companyName}`)
       .then(response => setItems(response.data))
   }
+
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: '수정,삭제', width: 150, renderCell: (param) => (
+      <strong>
+        {param.value}
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={() => setUpdateModalShow(true)}
+          style={{ marginLeft: 16 }}
+        >
+          수정
+        </Button>
+        <UpdateModal
+                    itemId = {param.value}
+                    show={updatemodalShow}
+                    onHide={() => setUpdateModalShow(false)}
+                />
+      
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={() => setDeleteModalShow(true)}
+        >
+          삭제
+        </Button>
+        <DeleteModal
+                    itemId = {param.value}
+                    show={deletemodalShow}
+                    onHide={() => setDeleteModalShow(false)}
+                />
+      </strong>
+      ),
+    },
+    { field: 'companyName', headerName: '회사', width: 150 },
+    { field: 'itemCode', headerName: '품목코드', width: 150 },
+    { field: 'itemName', headerName: '품목명', width: 150 },
+    { field: 'itemType', headerName: '품목유형', width: 150 },
+    { field: 'partNumber', headerName: 'P/N', width: 150 },
+    { field: 'itemGroup', headerName: '품목군', width: 150 },
+    { field: 'standard', headerName: '규격', width: 150 },
+    { field: 'receiptPaymentUnit', headerName: '수불단위', width: 150 },
+    { field: 'purchaseUnit', headerName: '매입단위', width: 150 },
+    { field: 'purchaseUnitQuantity', headerName: '매입단위수량', width: 150 },
+    { field: 'requiredUnit', headerName: '소요단위', width: 150 },
+    { field: 'requiredUnitQuantity', headerName: '소요단위수량', width: 150 },
+    { field: 'yieldUnit', headerName: '수율단위', width: 150 },
+    { field: 'yieldUnitQuantity', headerName: '수율단위수량', width: 150 },
+    
+  ];
 
 
   return (
