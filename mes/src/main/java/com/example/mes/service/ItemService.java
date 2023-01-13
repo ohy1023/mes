@@ -53,8 +53,8 @@ public class ItemService {
         return getItemDto(savedItem);
     }
 
-    public List<ItemDto> findItemByCon(String companyName) {
-        return itemRepository.findAllByCompanyNameEquals(companyName).stream().map(ItemService::getItemDto).collect(Collectors.toList());
+    public List<ItemDto> findItemByCon(String companyName,String itemType) {
+        return itemRepository.findAllByCompanyNameEqualsAndItemTypeEquals(companyName,itemType).stream().map(ItemService::getItemDto).collect(Collectors.toList());
     }
 
     public ItemDto findDetailItem(Long itemId) {

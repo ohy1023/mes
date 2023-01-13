@@ -48,10 +48,10 @@ public class ItemController {
         return ResponseEntity.ok().body(itemDto);
     }
 
-    @GetMapping("/items/filter")
-    public ResponseEntity<List<ItemDto>> findItemByCon(@RequestParam String companyName) {
-        List<ItemDto> itemDtoList = itemService.findItemByCon(companyName);
-        log.info("cnt : {}",itemDtoList.size());
+    @GetMapping("/items/search/{companyName}/{itemType}")
+    public ResponseEntity<List<ItemDto>> findItemByCon(@PathVariable String companyName, @PathVariable String itemType) {
+        List<ItemDto> itemDtoList = itemService.findItemByCon(companyName, itemType);
+        log.info("cnt : {}", itemDtoList.size());
         return ResponseEntity.ok().body(itemDtoList);
     }
 
@@ -63,7 +63,7 @@ public class ItemController {
 
     @PutMapping("/items/{itemId}")
     public ResponseEntity<Response<ItemUpdateResponse>> updateItem(@PathVariable Long itemId, @RequestBody ItemUpdateRequest request) {
-        ItemDto itemDto = itemService.updateItem(itemId,request);
+        ItemDto itemDto = itemService.updateItem(itemId, request);
         return ResponseEntity.ok().body(Response.success(new ItemUpdateResponse("품목 수정 완료", itemId)));
     }
 

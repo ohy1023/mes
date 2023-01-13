@@ -6,6 +6,7 @@ import axios from 'axios';
 import MyVerticallyCenteredModal from './Modal';
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';
+// import qs from "qs"
 
 function Items() {
 
@@ -40,6 +41,7 @@ function Items() {
     setItemGroup(e.target.value);
   };
 
+
   const register = () => {
     axios.post('api/items',{
       companyName : companyName,
@@ -72,16 +74,19 @@ function Items() {
         })}, [])
 
 
-  // const findDetailItems = (companyName) => {
-  //   axios.get('api/items/${companyName}')
-  //   .then(response => setItems(response.data))
-  // }
+  // axios.defaults.paramsSerializer = params => {
+  //     return qs.stringify(params);
+  //   }
 
-  const findDetailItems = (companyName) => {
-    axios
-      .get(`api/items/${companyName}`)
-      .then(response => setItems(response.data))
-  }
+  const findDetailItems = () => {
+    axios.get(`api/items/search/${companyName}/${itemType}`)
+    .then(response => setItems(response.data))}
+
+  // const findDetailItems = (companyName) => {
+  //   axios
+  //     .get(`api/items/${companyName}`)
+  //     .then(response => setItems(response.data))
+  // }
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: '수정,삭제', width: 150, renderCell: (param) => (
@@ -174,8 +179,7 @@ function Items() {
             <td style={{width: '100px'}}>
               <Form.Select onChange={handleItemType} value={itemType}>
                 <option>전체</option>
-                <option value="제품">제품</option>
-                <option value=""></option>
+                <option type="text" value="제품">제품</option>
               </Form.Select>
             </td>
             <td style={{width: '110px', fontSize: '23px'}}>품질군</td>
@@ -183,7 +187,6 @@ function Items() {
               <Form.Select onChange={handleItemGroup} value={itemGroup}>
                 <option>전체</option>
                 <option value="통합테스트">통합테스트</option>
-                <option value=""></option>
               </Form.Select>
             </td>
             <td style={{width: '110px', fontSize: '23px'}}>거래처</td>

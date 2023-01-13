@@ -13,5 +13,5 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "SELECT DISTINCT m.COMPANY_NAME FROM Item m",nativeQuery = true)
     List<String> findDistinctCompanyName();
 
-    List<Item> findAllByCompanyNameEquals(String companyName);
+    List<Item> findAllByCompanyNameEqualsAndItemTypeEquals(String companyName,String itemType);
 }
