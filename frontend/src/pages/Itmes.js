@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {GridColDef, GridActionsCellItem} from '@mui/x-data-grid';
+import DeleteIcon from "@material-ui/icons/Delete";
+import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Table,Button,Form,InputGroup} from 'react-bootstrap';
+import {Table, Button, Form, InputGroup} from 'react-bootstrap';
 import axios from 'axios';
 import MyVerticallyCenteredModal from './Modal';
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';
-// import qs from "qs"
+import {
+  DataGridPremium,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from '@mui/x-data-grid-premium';
 
 function Items() {
 
@@ -50,12 +56,8 @@ function Items() {
       itemType : itemType,
       itemGroup : itemGroup,
     })
-        .then((response) => {
-          console.log("success")
-        })
-        .catch((error) => {
-          console.log("error")
-        })
+    axios.get('api/items')
+        .then(response => setItems(response.data))
   }
 
   useEffect(() => {
@@ -73,56 +75,13 @@ function Items() {
           console.log("error")
         })}, [])
 
-
-  // axios.defaults.paramsSerializer = params => {
-  //     return qs.stringify(params);
-  //   }
-
   const findDetailItems = () => {
     axios.get(`api/items/search/${companyName}/${itemType}`)
     .then(response => setItems(response.data))}
 
-  // const findDetailItems = (companyName) => {
-  //   axios
-  //     .get(`api/items/${companyName}`)
-  //     .then(response => setItems(response.data))
-  // }
-
+    
   const columns: GridColDef[] = [
-    { field: 'id', headerName: '수정,삭제', width: 150, renderCell: (param) => (
-      <strong>
-        {param.value}
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          onClick={() => setUpdateModalShow(true)}
-          style={{ marginLeft: 16 }}
-        >
-          수정
-        </Button>
-        <UpdateModal
-                    itemId = {param.value}
-                    show={updatemodalShow}
-                    onHide={() => setUpdateModalShow(false)}
-                />
-      
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          onClick={() => setDeleteModalShow(true)}
-        >
-          삭제
-        </Button>
-        <DeleteModal
-                    itemId = {param.value}
-                    show={deletemodalShow}
-                    onHide={() => setDeleteModalShow(false)}
-                />
-      </strong>
-      ),
-    },
+    { field: 'id', headerName: 'NO', width: 150},
     { field: 'companyName', headerName: '회사', width: 150 },
     { field: 'itemCode', headerName: '품목코드', width: 150 },
     { field: 'itemName', headerName: '품목명', width: 150 },
@@ -137,6 +96,28 @@ function Items() {
     { field: 'requiredUnitQuantity', headerName: '소요단위수량', width: 150 },
     { field: 'yieldUnit', headerName: '수율단위', width: 150 },
     { field: 'yieldUnitQuantity', headerName: '수율단위수량', width: 150 },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: '수정 삭제',
+      getActions: (params) => [
+        <GridActionsCellItem icon={<AutoFixHighOutlinedIcon />} onClick={setUpdateModalShow} label="Delete"/>,
+        <UpdateModal
+            itemId = {params.id}
+            show={updatemodalShow}
+            onHide={() => setUpdateModalShow(false)}
+          />,
+        <GridActionsCellItem icon={<DeleteIcon />} onClick={setDeleteModalShow} label="Delete" />,
+        <DeleteModal
+            itemId = {params.id}
+            show={deletemodalShow}
+            onHide={() => setDeleteModalShow(false)}
+          />
+      ]
+
+      
+      
+    }
     
   ];
 
@@ -242,13 +223,23 @@ function Items() {
         <br/>
 
         <h4>📃 품목 목록</h4>
-        <div style={{height: 1000, width: '100%'}}>
-          <DataGrid rows={items} columns={columns}/>
+        <div style={{height: 500, width: '100%'}}>
+          <DataGridPremium rows={items} columns={columns} components={{
+          Toolbar: CustomToolbar,
+        }}/>
         </div>
       </div>
   );
   
   
 }      
+
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
+}
 
 export default Items;
