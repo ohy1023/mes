@@ -3,10 +3,8 @@ package com.example.mes.service;
 import com.example.mes.domain.dto.ItemDto;
 import com.example.mes.domain.entity.Item;
 import com.example.mes.domain.request.ItemAddRequest;
-import com.example.mes.domain.request.ItemConditionRequest;
 import com.example.mes.domain.request.ItemCreateRequest;
 import com.example.mes.domain.request.ItemUpdateRequest;
-import com.example.mes.exception.ErrorCode;
 import com.example.mes.exception.MesAppException;
 import com.example.mes.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +28,14 @@ public class ItemService {
         return getItemDto(itemRepository.save(itemCreateRequest.toEntity()));
     }
 
+    @Transactional(readOnly = true)
     public List<ItemDto> findAll() {
         return itemRepository.findAll().stream().map(ItemService::getItemDto).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<String> findCompanyList() {
-        List<String> distinctCompanyName = itemRepository.findDistinctCompanyName();
+        List<String> distinctCompanyName = itemRepository.findCompanyList();
         log.info("companyList : {}", distinctCompanyName);
         return distinctCompanyName;
     }
@@ -53,10 +53,12 @@ public class ItemService {
         return getItemDto(savedItem);
     }
 
+    @Transactional(readOnly = true)
     public List<ItemDto> findItemByCon(String companyName,String itemType) {
-        return itemRepository.findAllByCompanyNameEqualsAndItemTypeEquals(companyName,itemType).stream().map(ItemService::getItemDto).collect(Collectors.toList());
+        return itemRepository.findCondition(companyName,itemType).stream().map(ItemService::getItemDto).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public ItemDto findDetailItem(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new MesAppException(ITEM_NOT_FOUND, ITEM_NOT_FOUND.getMessage()));
