@@ -45,7 +45,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-def frontendDir = "C:\\Users\\ohy\\Desktop\\javaEx\\mes-project\\frontend"
+def frontendDir = "C:\\Users\\ohy\\Desktop\\javaEx\\mes-project\\new\\frontend"
 
 sourceSets {
     main {

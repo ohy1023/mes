@@ -48,10 +48,12 @@ public class ItemController {
         return ResponseEntity.ok().body(itemDto);
     }
 
-    @GetMapping("/items/search/{companyName}/{itemType}")
-    public ResponseEntity<List<ItemDto>> findItemByCon(@PathVariable String companyName, @PathVariable String itemType) {
+    @GetMapping("/items/search")
+    public ResponseEntity<List<ItemDto>> findItemByCon(@RequestParam(required = false) String companyName, @RequestParam(required = false) String itemType) {
+        log.info("companyName : {}",companyName);
+        log.info("itemType : {}",itemType);
         List<ItemDto> itemDtoList = itemService.findItemByCon(companyName, itemType);
-        log.info("cnt : {}", itemDtoList.size());
+        log.info("search cnt : {}", itemDtoList.size());
         return ResponseEntity.ok().body(itemDtoList);
     }
 
