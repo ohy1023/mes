@@ -8,7 +8,6 @@ import axios from 'axios';
 import MyVerticallyCenteredModal from './Modal';
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';
-import { GridCsvExportOptions } from '@mui/x-data-grid';
 
 
 function Items() {
@@ -53,7 +52,8 @@ function Items() {
       itemName : itemName,
       itemType : itemType,
       itemGroup : itemGroup,
-    })
+    }).then( response => setItems(items.concat(response.data)))
+    
   }
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function Items() {
         .then(response => setItems(response.data))
         .catch((error) => {
           console.log("error")
-        })}, [])
+        })}, [setItems])
 
   function updateHandler() {
     setUpdateModalShow(true)
@@ -144,7 +144,7 @@ function Items() {
         backgroundColor: 'Snow'
       }}>
         <br/>
-        <h3>⚙ 품목단위정보ewafewa 등록
+        <h3>⚙ 품목단위정보 등록
           <Button variant="primary" onClick={findDetailItems} size='lg'
                   style={{position: 'absolute', right: 0, marginRight: '140px'}}>
             조회

@@ -43,7 +43,11 @@ function UpdateModal(props) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={update}>수정</Button>
+        <Button onClick={()=>{
+          update()
+          props.onHide()
+          }}>수정</Button>
+        <Button onClick={props.onHide}>취소</Button>
       </Modal.Footer>
     </Modal>
   );
