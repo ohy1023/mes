@@ -27,7 +27,10 @@ function DeleteModal(props) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={deleteItem}>삭제</Button>
+        <Button onClick={()=>{
+          deleteItem()
+          props.onHide()
+          }}>삭제</Button>
         <Button onClick={props.onHide}>취소</Button>
       </Modal.Footer>
     </Modal>
