@@ -14,9 +14,7 @@ function UpdateModal(props) {
     axios.put(`api/items/${props.itemId}`,{
       companyName : companyName,
     })
-        .then((response) => {
-          console.log("success")
-        })
+        .then((response) => props.childSetItems(props.childItems.map((item) => item.id === props.itemId ? {...item, companyName:companyName} : item)))
         .catch((error) => {
           console.log("error")
         })

@@ -8,6 +8,7 @@ import axios from 'axios';
 import MyVerticallyCenteredModal from './Modal';
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';
+import { Box } from '@mui/material';
 
 
 function Items() {
@@ -92,31 +93,36 @@ function Items() {
   };
     
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'NO', width: 150},
-    { field: 'companyName', headerName: '회사', width: 150 },
-    { field: 'itemCode', headerName: '품목코드', width: 150 },
-    { field: 'itemName', headerName: '품목명', width: 150 },
-    { field: 'itemType', headerName: '품목유형', width: 150 },
-    { field: 'partNumber', headerName: 'P/N', width: 150 },
-    { field: 'itemGroup', headerName: '품목군', width: 150 },
-    { field: 'standard', headerName: '규격', width: 150 },
-    { field: 'receiptPaymentUnit', headerName: '수불단위', width: 150 },
-    { field: 'purchaseUnit', headerName: '매입단위', width: 150 },
-    { field: 'purchaseUnitQuantity', headerName: '매입단위수량', width: 150 },
-    { field: 'requiredUnit', headerName: '소요단위', width: 150 },
-    { field: 'requiredUnitQuantity', headerName: '소요단위수량', width: 150 },
-    { field: 'yieldUnit', headerName: '수율단위', width: 150 },
-    { field: 'yieldUnitQuantity', headerName: '수율단위수량', width: 150 },
+    { field: 'id', headerName: 'id', hide: true},
+    { field: 'companyName', headerName: '회사', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'itemCode', headerName: '품목코드', width: 150, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'itemName', headerName: '품목명', width: 150, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'itemType', headerName: '품목유형', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'partNumber', headerName: 'P/N', width: 150, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'itemGroup', headerName: '품목군', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'standard', headerName: '규격', width: 125, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'receiptPaymentUnit', headerName: '수불단위', width: 125, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'purchaseUnit', headerName: '매입단위', width: 125, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'purchaseUnitQuantity', headerName: '매입단위수량', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'requiredUnit', headerName: '소요단위', width: 125, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'requiredUnitQuantity', headerName: '소요단위수량', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'yieldUnit', headerName: '수율단위', width: 125, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
+    { field: 'yieldUnitQuantity', headerName: '수율단위수량', width: 100, headerAlign: 'center',align: 'center',headerClassName: 'super-app-theme--header'},
     {
       field: 'actions',
       type: 'actions',
       headerName: '수정 삭제',
+      width: 100,
+      headerAlign: 'center',align: 'center',
+      headerClassName: 'super-app-theme--header',
       getActions: (params) => [
         <GridActionsCellItem icon={<AutoFixHighOutlinedIcon />} onClick={(e)=>{
           onButtonClick(e,params.row)
           updateHandler()
         }} label="Delete"/>,
         <UpdateModal
+          childSetItems = {setItems}
+          childItems = {items}
           itemId = {clickedRow.id === 'undefined' ? 0:clickedRow.id}
           show={updatemodalShow}
           onHide={() => setUpdateModalShow(false)}
@@ -126,7 +132,9 @@ function Items() {
           deleteHandler()
         }} label="Delete" />,
         <DeleteModal
-        itemId = {clickedRow.id === 'undefined' ? 0:clickedRow.id}
+          childSetItems = {setItems}
+          childItems = {items}
+          itemId = {clickedRow.id === 'undefined' ? 0:clickedRow.id}
           show={deletemodalShow}
           onHide={() => setDeleteModalShow(false)}
           />
@@ -237,10 +245,25 @@ function Items() {
         <br/>
 
         <h4>📃 품목 목록</h4>
-        <div style={{height: 500, width: '100%'}}>
-          <DataGrid rows={items} columns={columns} components={{
-          Toolbar: CustomToolbar,
-        }}/>
+        <div>
+        <Box
+          sx={{
+            height: 800,
+            width: '100%',
+            '& .super-app-theme--header': {
+              backgroundColor: 'rgba(54, 73, 81, 1)',
+              color:'white',
+            },
+          }}>
+          <DataGrid rows={items} columns={columns} initialState={{
+            sorting: {
+              sortModel: [{ field: 'id', sort: 'asc' }],
+            },
+            }} components={{
+                Toolbar: CustomToolbar,
+               }}/>
+        </Box>
+          
         </div>
       </div>
   );

@@ -6,7 +6,8 @@ import axios from 'axios';
 function DeleteModal(props) {
 
   const deleteItem = () => {
-    axios.delete(`api/items/${props.itemId}`);
+    axios.delete(`api/items/${props.itemId}`)
+    .then((response) => props.childSetItems(props.childItems.filter((item) => item.id !== props.itemId)));
   }
 
   return (
