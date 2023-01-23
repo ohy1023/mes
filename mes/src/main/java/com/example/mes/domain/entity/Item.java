@@ -4,14 +4,20 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item {
+@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE ITEM SET deleted_at = CURRENT_TIMESTAMP WHERE item_id = ?")
+public class Item extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "item_id")
     private Long id;
 
     private String companyName;

@@ -25,12 +25,12 @@ public class ItemService {
 
     @Transactional
     public ItemDto create(ItemCreateRequest itemCreateRequest) {
-        return getItemDto(itemRepository.save(itemCreateRequest.toEntity()));
+        return ItemDto.toItemDto(itemRepository.save(itemCreateRequest.toEntity()));
     }
 
     @Transactional(readOnly = true)
     public List<ItemDto> findAll() {
-        return itemRepository.findAll().stream().map(ItemService::getItemDto).collect(Collectors.toList());
+        return itemRepository.findAll().stream().map(ItemDto::toItemDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -50,12 +50,12 @@ public class ItemService {
                 .itemGroup(request.getItemGroup())
                 .build());
 
-        return getItemDto(savedItem);
+        return ItemDto.toItemDto(savedItem);
     }
 
     @Transactional(readOnly = true)
     public List<ItemDto> findItemByCon(String companyName,String itemType) {
-        return itemRepository.findCondition(companyName,itemType).stream().map(ItemService::getItemDto).collect(Collectors.toList());
+        return itemRepository.findCondition(companyName,itemType).stream().map(ItemDto::toItemDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -63,7 +63,7 @@ public class ItemService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new MesAppException(ITEM_NOT_FOUND, ITEM_NOT_FOUND.getMessage()));
         log.info("COMPANYNAME:{}",item.getCompanyName());
-        return getItemDto(item);
+        return ItemDto.toItemDto(item);
     }
 
     @Transactional
@@ -79,7 +79,7 @@ public class ItemService {
                 .itemName(request.getItemName())
                 .build();
 
-        return getItemDto(itemRepository.save(updatedItem));
+        return ItemDto.toItemDto((itemRepository.save(updatedItem)));
     }
 
     @Transactional
@@ -88,23 +88,23 @@ public class ItemService {
         return itemId;
     }
 
-    private static ItemDto getItemDto(Item savedItem) {
-        return ItemDto.builder()
-                .id(savedItem.getId())
-                .companyName(savedItem.getCompanyName())
-                .itemName(savedItem.getItemName())
-                .itemType(savedItem.getItemType())
-                .itemCode(savedItem.getItemCode())
-                .itemGroup(savedItem.getItemGroup())
-                .partNumber(savedItem.getPartNumber())
-                .receiptPaymentUnit(savedItem.getReceiptPaymentUnit())
-                .standard(savedItem.getStandard())
-                .purchaseUnit(savedItem.getPurchaseUnit())
-                .purchaseUnitQuantity(savedItem.getPurchaseUnitQuantity())
-                .requiredUnit(savedItem.getRequiredUnit())
-                .requiredUnitQuantity(savedItem.getRequiredUnitQuantity())
-                .yieldUnit(savedItem.getYieldUnit())
-                .yieldUnitQuantity(savedItem.getYieldUnitQuantity())
-                .build();
-    }
+//    private static ItemDto getItemDto(Item savedItem) {
+//        return ItemDto.builder()
+//                .id(savedItem.getId())
+//                .companyName(savedItem.getCompanyName())
+//                .itemName(savedItem.getItemName())
+//                .itemType(savedItem.getItemType())
+//                .itemCode(savedItem.getItemCode())
+//                .itemGroup(savedItem.getItemGroup())
+//                .partNumber(savedItem.getPartNumber())
+//                .receiptPaymentUnit(savedItem.getReceiptPaymentUnit())
+//                .standard(savedItem.getStandard())
+//                .purchaseUnit(savedItem.getPurchaseUnit())
+//                .purchaseUnitQuantity(savedItem.getPurchaseUnitQuantity())
+//                .requiredUnit(savedItem.getRequiredUnit())
+//                .requiredUnitQuantity(savedItem.getRequiredUnitQuantity())
+//                .yieldUnit(savedItem.getYieldUnit())
+//                .yieldUnitQuantity(savedItem.getYieldUnitQuantity())
+//                .build();
+//    }
 }

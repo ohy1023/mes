@@ -82,4 +82,24 @@ public class ItemDto {
                 .collect(Collectors.toList());
         return itemDtos;
     }
+
+    public static ItemDto toItemDto(Item savedItem) {
+        return ItemDto.builder()
+                .id(savedItem.getId())
+                .companyName(savedItem.getCompanyName())
+                .itemName(savedItem.getItemName())
+                .itemType(savedItem.getItemType())
+                .itemCode(savedItem.getItemCode())
+                .itemGroup(savedItem.getItemGroup())
+                .partNumber(savedItem.getPartNumber())
+                .receiptPaymentUnit(savedItem.getReceiptPaymentUnit())
+                .standard(savedItem.getStandard())
+                .purchaseUnit(savedItem.getPurchaseUnit())
+                .purchaseUnitQuantity(savedItem.getPurchaseUnitQuantity())
+                .requiredUnit(savedItem.getRequiredUnit())
+                .requiredUnitQuantity(savedItem.getRequiredUnitQuantity())
+                .yieldUnit(savedItem.getYieldUnit())
+                .yieldUnitQuantity(savedItem.getYieldUnitQuantity())
+                .build();
+    }
 }
