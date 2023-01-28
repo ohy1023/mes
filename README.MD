@@ -53,6 +53,7 @@
 |          | PUT    | /api/items         | 품목 수정              |      |
 |          | DELETE | /api/items         | 품목 삭제              |      |
 |          | GET    | /api/items/company | 품목 등록한 회사 이름 전체 조회 |      |
+|          | GET    | /api/items/search | 품목 조건 조회 |      |
 
 <br />
 
