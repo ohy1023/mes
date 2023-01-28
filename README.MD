@@ -54,11 +54,21 @@
 |          | DELETE | /api/items         | 품목 삭제              |      |
 |          | GET    | /api/items/company | 품목 등록한 회사 이름 전체 조회 |      |
 
+<br />
+
+<br />
+
+
 ### 📌 ERROR CODE
 | 에러 코드          | 설명                | HTTP status |
 |----------------|-------------------|-------------|
 | ITEM_NOT_FOUND | 해당 품목을 찾을 수 없는 경우 | 404         |
 | DATABASE_ERROR | DB와의 연결 이상인 경우    | 500         |
+
+<br />
+
+<br />
+
 
 
 ### 📌 화면
