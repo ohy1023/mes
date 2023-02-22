@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.mes.config;
 
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
