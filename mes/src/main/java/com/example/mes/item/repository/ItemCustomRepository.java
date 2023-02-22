@@ -1,4 +1,4 @@
-package com.example.mes.item.repository.repository;
+package com.example.mes.item.repository;
 
 import com.example.mes.item.entity.Item;
 

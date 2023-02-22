@@ -1,4 +1,4 @@
-package com.example.mes.item.repository.repository;
+package com.example.mes.item.repository;
 
 import com.example.mes.item.entity.Item;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import static com.example.mes.domain.entity.QItem.*;
+import static com.example.mes.item.entity.QItem.item;
+
 
 @Repository
 @RequiredArgsConstructor

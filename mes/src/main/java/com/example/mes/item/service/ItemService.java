@@ -6,7 +6,7 @@ import com.example.mes.item.dto.ItemAddRequest;
 import com.example.mes.item.dto.ItemCreateRequest;
 import com.example.mes.item.dto.ItemUpdateRequest;
 import com.example.mes.common.exception.MesAppException;
-import com.example.mes.item.repository.repository.ItemRepository;
+import com.example.mes.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
