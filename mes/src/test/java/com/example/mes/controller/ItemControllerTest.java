@@ -1,6 +1,6 @@
 //package com.example.mes.controller;
 //
-//import com.example.mes.service.ItemService;
+//import com.example.mes.item.service.ItemService;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
