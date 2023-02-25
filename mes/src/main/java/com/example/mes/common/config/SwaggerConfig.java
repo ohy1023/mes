@@ -1,4 +1,4 @@
-package com.example.mes.config;
+package com.example.mes.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
