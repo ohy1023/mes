@@ -11,7 +11,7 @@ function UpdateModal(props) {
   };
 
   const update = () => {
-    axios.put(`api/items/${props.itemId}`,{
+    axios.put(`api/v1/items/${props.itemId}`,{
       companyName : companyName,
     })
         .then((response) => props.childSetItems(props.childItems.map((item) => item.id === props.itemId ? {...item, companyName:companyName} : item)))

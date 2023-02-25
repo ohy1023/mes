@@ -47,7 +47,7 @@ function Items() {
   };
 
   const register = () => {
-    axios.post('api/items',{
+    axios.post('api/v1/items',{
       companyName : companyName,
       itemCode : itemCode,
       itemName : itemName,
@@ -58,7 +58,7 @@ function Items() {
   }
 
   useEffect(() => {
-    axios.get('api/items/company')
+    axios.get('api/v1/items/company')
         .then(response => setCompanyList(response.data))
         .catch((error) => {
           console.log("error")
@@ -66,7 +66,7 @@ function Items() {
   }, [])
 
   useEffect(() => {
-    axios.get('api/items')
+    axios.get('api/v1/items')
         .then(response => setItems(response.data))
         .catch((error) => {
           console.log("error")
@@ -80,7 +80,7 @@ function Items() {
   }
   
   const findDetailItems = () => {
-    axios.get(`api/items/search/`,{
+    axios.get(`api/v1/items/search/`,{
       params:{
         companyName:companyName,
         itemType:itemType

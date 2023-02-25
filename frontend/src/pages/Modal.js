@@ -10,7 +10,7 @@ function MyVerticallyCenteredModal(props) {
   const [accounts, setAccounts] = useState([])
 
   useEffect(() => {
-    axios.get('api/accounts')
+    axios.get('api/v1/accounts')
         .then(response => setAccounts(response.data.result))
         .catch((error) => {
           console.log("error")
