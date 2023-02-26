@@ -87,7 +87,7 @@ public class UserController {
 
 
     @ApiOperation(value = "역할 변경")
-    @PostMapping("/{userId}/role")
+    @PostMapping("/{userId}")
     public ResponseEntity<Response<UserRoleResponse>> changeRole(@PathVariable Integer userId, Authentication authentication) {
         UserRoleResponse response = userService.changeRole(userId, authentication.getName());
         return ResponseEntity.ok().body(Response.success(response));

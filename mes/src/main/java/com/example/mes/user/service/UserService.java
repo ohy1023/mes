@@ -163,7 +163,7 @@ public class UserService {
                     });
 
             if (removeClick == 1) {
-                user.updateUser(userName, "https://ohy1023.s3.ap-northeast-2.amazonaws.com/basic.png");
+                user.updateUser(userName, "h");
             } else {
                 user.updateUserName(userName);
             }
