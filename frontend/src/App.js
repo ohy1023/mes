@@ -18,7 +18,7 @@ function App() {
               </Nav>
           </Navbar>
           <Routes>
-              <Route path='/' element={<>메인 페이지</>}/>
+              <Route path='/' element={<>메인 페이지2</>}/>
               <Route path='/items' element={<Items/>}/>
           </Routes>
       </>
