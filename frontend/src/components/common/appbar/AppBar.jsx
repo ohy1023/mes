@@ -98,7 +98,7 @@ function ResponsiveAppBar() {
               >
                 <MenuItem key={pages[0]} onClick={() => {
                   handleCloseNavMenu()
-                  navigate('/upbitMainPage')
+                  navigate('/items')
                 }}>
                   <Typography textAlign="center">{pages[0]}</Typography>
                 </MenuItem>
