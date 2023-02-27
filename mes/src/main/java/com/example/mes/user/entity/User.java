@@ -19,9 +19,13 @@ import static com.example.mes.user.enums.UserRole.USER;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE USERS SET deleted_at = CURRENT_TIMESTAMP WHERE user_id = ?")
+@SequenceGenerator(
+        name = "USER_SEQ_GENERATOR",
+        sequenceName = "USER_SEQ", //매핑할 데이터베이스 시퀀스 이름
+        initialValue = 1, allocationSize = 1)
 public class User extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
     @Column(name = "user_id")
     private Integer id;
 

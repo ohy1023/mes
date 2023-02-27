@@ -15,9 +15,13 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE ITEM SET deleted_at = CURRENT_TIMESTAMP WHERE item_id = ?")
+@SequenceGenerator(
+        name = "ITEM_SEQ_GENERATOR",
+        sequenceName = "ITEM_SEQ", //매핑할 데이터베이스 시퀀스 이름
+        initialValue = 1, allocationSize = 1)
 public class Item extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SEQ_GENERATOR")
     @Column(name = "item_id")
     private Long id;
 

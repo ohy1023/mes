@@ -4,6 +4,7 @@ import com.example.mes.common.exception.MesAppException;
 import com.example.mes.user.controller.UserController;
 import com.example.mes.user.dto.UserJoinRequest;
 import com.example.mes.user.dto.UserJoinResponse;
+import com.example.mes.user.dto.UserLoginRequest;
 import com.example.mes.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -82,6 +83,25 @@ class UserControllerTest {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.resultCode").value("ERROR"))
                 .andExpect(jsonPath("$.result.errorCode").value("DUPLICATED_EMAIL"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("로그인 성공")
+    @WithMockUser
+    void login() throws Exception {
+        // given
+        UserLoginRequest request = UserLoginRequest.builder()
+                .email("ohy1023@naver.com")
+                .password("ohy1023")
+                .build();
+
+        //when & then
+        mockMvc.perform(post("/api/v1/users/login")
+                        .with(csrf())
+                        .content(objectMapper.writeValueAsBytes(request))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andDo(print());
     }
 

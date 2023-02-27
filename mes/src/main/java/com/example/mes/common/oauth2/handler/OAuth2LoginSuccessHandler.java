@@ -47,7 +47,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
 
-        String targetUrl = UriComponentsBuilder.fromUriString("http://mymesproject.s3-website.ap-northeast-2.amazonaws.com/login")
+        String targetUrl = UriComponentsBuilder.fromUriString("http://mystudyproject.store/login")
                 .queryParam("accessToken", accessToken)
                 .queryParam("refreshToken", refreshToken)
                 .queryParam("email",oAuth2User.getEmail())
