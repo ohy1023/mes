@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserRoleResponse changeRole(Integer userId, String email) {
+    public UserRoleResponse changeRole(Long userId, String email) {
         User admin = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
                     throw new MesAppException(EMAIL_NOT_FOUND, EMAIL_NOT_FOUND.getMessage());
@@ -107,7 +107,7 @@ public class UserService {
     }
 
     @Transactional
-    public Integer delete(String email) {
+    public Long delete(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
                     throw new MesAppException(EMAIL_NOT_FOUND, EMAIL_NOT_FOUND.getMessage());
@@ -136,7 +136,7 @@ public class UserService {
 
 
     @Transactional
-    public Integer modifyPassword(String email, UserUpdatePasswordRequest request) {
+    public Long modifyPassword(String email, UserUpdatePasswordRequest request) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
                     throw new MesAppException(EMAIL_NOT_FOUND, EMAIL_NOT_FOUND.getMessage());

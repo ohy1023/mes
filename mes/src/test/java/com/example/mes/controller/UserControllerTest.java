@@ -48,7 +48,7 @@ class UserControllerTest {
                 .password("ohy1023")
                 .build();
         given(userService.join(any(UserJoinRequest.class)))
-                .willReturn(new UserJoinResponse(1, request.getEmail()));
+                .willReturn(new UserJoinResponse(1L, request.getEmail()));
 
         //when & then
         mockMvc.perform(post("/api/v1/users/join")

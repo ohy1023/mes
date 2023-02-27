@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
     @Column(name = "user_id")
-    private Integer id;
+    private Long id;
 
     private String userName;
 
@@ -76,7 +76,7 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(Integer id, String userName, String password, String email, String imageUrl, UserRole userRole, SocialType socialType, String socialId) {
+    public User(Long id, String userName, String password, String email, String imageUrl, UserRole userRole, SocialType socialType, String socialId) {
         this.id = id;
         this.userName = userName;
         this.password = password;

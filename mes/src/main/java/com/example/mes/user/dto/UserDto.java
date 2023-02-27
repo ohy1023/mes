@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserDto {
-    private Integer id;
+    private Long id;
     private String userName;
     private String password;
     private UserRole userRole;
 
     @Builder
-    public UserDto(Integer id, String userName, String password, UserRole userRole) {
+    public UserDto(Long id, String userName, String password, UserRole userRole) {
         this.id = id;
         this.userName = userName;
         this.password = password;

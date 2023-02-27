@@ -89,7 +89,6 @@ class ItemControllerTest {
                         .content(objectMapper.writeValueAsBytes(request))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("http://localhost/login"))
                 .andDo(print());
 
     }

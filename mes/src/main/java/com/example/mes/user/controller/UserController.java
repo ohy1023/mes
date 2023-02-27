@@ -59,7 +59,7 @@ public class UserController {
     public ResponseEntity<Response<String>> updatePassword(@RequestBody UserUpdatePasswordRequest request, Authentication authentication) {
         String email = authentication.getName();
         log.info("userEmail:{}", email);
-        Integer userId = userService.modifyPassword(email, request);
+        Long userId = userService.modifyPassword(email, request);
         return ResponseEntity.ok().body(Response.success(" 비밀번호가 변경되었습니다.\n 다시 로그인해 주세요."));
     }
 
@@ -81,14 +81,14 @@ public class UserController {
     public ResponseEntity<Response<String>> deleteUser(Authentication authentication) {
         String email = authentication.getName();
         log.info("userEmail:{}", email);
-        Integer userId = userService.delete(email);
+        Long userId = userService.delete(email);
         return ResponseEntity.ok().body(Response.success("회원이 탈퇴되었습니다."));
     }
 
 
     @ApiOperation(value = "역할 변경")
     @PostMapping("/{userId}")
-    public ResponseEntity<Response<UserRoleResponse>> changeRole(@PathVariable Integer userId, Authentication authentication) {
+    public ResponseEntity<Response<UserRoleResponse>> changeRole(@PathVariable Long userId, Authentication authentication) {
         UserRoleResponse response = userService.changeRole(userId, authentication.getName());
         return ResponseEntity.ok().body(Response.success(response));
     }

@@ -37,4 +37,9 @@ public class Account extends BaseEntity {
         this.accountCode = accountCode;
         this.accountName = accountName;
     }
+
+    public void updateAccount(String newAccountCode, String newAccountName) {
+        this.accountCode = newAccountCode;
+        this.accountName = newAccountName;
+    }
 }

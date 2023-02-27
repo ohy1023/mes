@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserJoinResponse {
 
-    private Integer userId;
+    private Long userId;
 
     private String email;
 
     @Builder
-    public UserJoinResponse(Integer userId, String email) {
+    public UserJoinResponse(Long userId, String email) {
         this.userId = userId;
         this.email = email;
     }
