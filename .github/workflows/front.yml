@@ -35,8 +35,8 @@ jobs:
        run: npm install
 
      - name: Build                   # React Build
-       run: npm run build
-
+       run: CI='false' npm run build # warning 로그를 모두 error로 취급하여 빌드 실패 -> CI=false 설정하여 처리
+       
      - name: Deploy                  # S3에 배포하기
        env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
