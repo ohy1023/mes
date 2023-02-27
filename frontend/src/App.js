@@ -1,30 +1,30 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar,Nav} from 'react-bootstrap';
-import {Route, Routes, useNavigate} from 'react-router-dom';
-import Items from './pages/Itmes';
+import {Route, Routes} from 'react-router-dom';
+import Items from './components/pages/item/Itmes';
+import Header from './components/common/appbar/AppBar';
+import Footer from './components/common/footer/Footer';
+import Joinform from './components/pages/join/Joinform';
+import SignIn from './components/pages/login/SignIn';
+import MainPage from './components/pages/Mainpage/Mainpage';
 
 
 function App() {
 
-    const navigate = useNavigate();
-
     return (
       <>
-          <Navbar bg="dark" variant="dark">
-              <Navbar.Brand style={{margin:'10px'}}><Nav.Link onClick={()=>{navigate('/')}} >MES</Nav.Link></Navbar.Brand>
-              <Nav className="me-auto">
-                  <Nav.Link onClick={()=>{navigate('/items')}}>품목단위정보 등록</Nav.Link>
-              </Nav>
-          </Navbar>
+          <Header/>
           <Routes>
-              <Route path='/' element={<>메인 페이지3</>}/>
+              <Route path='/' element={<MainPage/>}/>
               <Route path='/items' element={<Items/>}/>
+              <Route path='/join' element={<Joinform/>}/>
+              <Route path='/login' element={<SignIn/>}/>
           </Routes>
+          <Footer/>
       </>
     );
 
 }
+
 
 
 

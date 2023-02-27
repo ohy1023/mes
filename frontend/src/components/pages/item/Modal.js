@@ -13,7 +13,7 @@ function MyVerticallyCenteredModal(props) {
     axios.get('/api/v1/accounts')
         .then(response => setAccounts(response.data.result))
         .catch((error) => {
-          console.log("error")
+          console.log(error.response)
         })}, [setAccounts])
   
   const columns: GridColDef[] = [
