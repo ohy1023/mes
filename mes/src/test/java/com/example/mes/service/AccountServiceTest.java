@@ -6,7 +6,6 @@ import com.example.mes.account.dto.AccountUpdateRequest;
 import com.example.mes.account.entity.Account;
 import com.example.mes.account.repository.AccountRepository;
 import com.example.mes.account.service.AccountService;
-import com.example.mes.common.exception.ErrorCode;
 import com.example.mes.common.exception.MesAppException;
 import com.example.mes.fixture.AccountInfoFixture;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

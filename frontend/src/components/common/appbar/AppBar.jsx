@@ -155,7 +155,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 key={pages[0]}
-                onClick={() => { navigate('/upbitMainPage') }}
+                onClick={() => { navigate('/itmes') }}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 1 }}
               >
                 {pages[0]}
