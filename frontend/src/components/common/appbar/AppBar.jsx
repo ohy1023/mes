@@ -18,7 +18,7 @@ import { ThemeProvider } from '@mui/material';
 import Logo from '../../../assets/appBar/logo.png';
 
 
-const pages = ['품목단위정보 등록', 'temp', 'temp'];
+const pages = ['품목 단위 정보 등록', '설비 가동 현황', '사원 관리'];
 
 const customTheme = createTheme({
   palette: {
@@ -155,7 +155,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 key={pages[0]}
-                onClick={() => { navigate('/itmes') }}
+                onClick={() => { navigate('/items') }}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 1 }}
               >
                 {pages[0]}

@@ -1,10 +1,7 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import SendIcon from '@mui/material/Icon'
-import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid';
-//import mainPageBackgroundImage from '../../../assets/mainpage/mainpage_background_image.jpg'
 import mainPageBackgroundImage from '../../../assets/mainpage/background.jpg'
 import styles from "./MainPage.css";
 import QueryStatsOutlinedIcon from '@mui/icons-material/QueryStatsOutlined';
@@ -94,7 +91,7 @@ function MainPage() {
   const navigate = useNavigate();
 
   const clickToMainPage = () => {
-    navigate('/upbitMainPage')
+    navigate('/items')
   }
 
     return (
@@ -118,7 +115,7 @@ function MainPage() {
                       <div style={{marginTop: '50px'}}>
                         <a href="upbitMainPage">
                           <AddCardOutlinedIcon sx={{ fontSize: 90, mr:3 }}/>
-                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}> 품목단위정보 등록</span>
+                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}>품목 단위 정보 등록</span>
                         </a>
                       </div>
                     </Item>
@@ -130,7 +127,7 @@ function MainPage() {
                       <div style={{marginTop: '50px'}}>
                         <a href="diary">
                           <QueryStatsOutlinedIcon sx={{ fontSize: 90, mr:3 }}/>
-                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}> Temp</span>
+                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}>설비 가동 현황</span>
                         </a>
                       </div>
                     </Item>
@@ -143,7 +140,7 @@ function MainPage() {
                       <div style={{marginTop: '50px'}}>
                         <a href="community">
                           <ForumOutlinedIcon sx={{ fontSize: 90, mr:3 }}/>
-                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}> Temp</span>
+                          <span style={{ margin: '12px 25px 12px 12px', fontSize: 25 }}>사원 관리</span>
                         </a>
                       </div>
                     </Item>
