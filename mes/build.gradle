@@ -29,7 +29,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.mysql:mysql-connector-j:8.0.31'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -52,9 +51,6 @@ dependencies {
 
     // JWT
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
-    // OAuth2
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // AWS S3
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
