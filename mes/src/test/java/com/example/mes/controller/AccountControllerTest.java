@@ -123,7 +123,7 @@ class AccountControllerTest {
                         .with(csrf())
                         .content(objectMapper.writeValueAsBytes(request))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isUnauthorized())
                 .andDo(print());
 
     }

@@ -71,20 +71,20 @@ class ItemControllerTest {
         ItemAddRequest request = ItemAddRequest.builder()
                 .itemName("아이폰")
                 .itemCode("AW423DFH4")
-                .itemType("ㅇㅇ")
-                .itemGroup("ㅇㅇ")
+                .itemType("무선 이어폰")
+                .itemGroup("전자기기")
                 .companyName("애플")
                 .build();
 
         given(itemService.addItem(any(ItemAddRequest.class)))
-                .willThrow(new MesAppException(INVALID_PERMISSION,INVALID_PERMISSION.getMessage()));
+                .willThrow(new MesAppException(INVALID_PERMISSION, INVALID_PERMISSION.getMessage()));
 
         // when & then
         mockMvc.perform(post("/api/v1/items")
                         .with(csrf())
                         .content(objectMapper.writeValueAsBytes(request))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isUnauthorized())
                 .andDo(print());
 
     }
