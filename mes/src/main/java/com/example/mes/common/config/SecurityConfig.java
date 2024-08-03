@@ -1,18 +1,12 @@
 package com.example.mes.common.config;
 
 
-import com.example.mes.MesApplication;
-import com.example.mes.common.exception.ErrorCode;
-import com.example.mes.common.exception.MesAppException;
 import com.example.mes.common.jwt.filter.JwtAuthenticationProcessingFilter;
 import com.example.mes.common.jwt.service.JwtService;
 import com.example.mes.common.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
 import com.example.mes.common.login.handler.LoginFailureHandler;
 import com.example.mes.common.login.handler.LoginSuccessHandler;
 import com.example.mes.common.login.service.LoginService;
-import com.example.mes.common.oauth2.handler.OAuth2LoginFailureHandler;
-import com.example.mes.common.oauth2.handler.OAuth2LoginSuccessHandler;
-import com.example.mes.common.oauth2.service.CustomOAuth2UserService;
 import com.example.mes.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +29,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static com.example.mes.common.exception.ErrorCode.*;
-
 
 /**
  * 인증은 CustomJsonUsernamePasswordAuthenticationFilter에서 authenticate()로 인증된 사용자로 처리
@@ -55,9 +47,6 @@ public class SecurityConfig {
 
     private final RedisTemplate<String, String> redisTemplate;
     private final ObjectMapper objectMapper;
-    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
-    private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
-    private final CustomOAuth2UserService customOAuth2UserService;
 
     private final String[] SWAGGER = {
             "/v3/api-docs",
@@ -90,13 +79,6 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()
                 .anyRequest().permitAll() // 위의 경로 이외에는 모두 접근 가능
-                .and()
-                //== 소셜 로그인 설정 ==//
-                .oauth2Login()
-                .successHandler(oAuth2LoginSuccessHandler) // 동의하고 계속하기를 눌렀을 때 Handler 설정
-                .failureHandler(oAuth2LoginFailureHandler) // 소셜 로그인 실패 시 핸들러 설정
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService)
                 ; // customUserService 설정
 
 

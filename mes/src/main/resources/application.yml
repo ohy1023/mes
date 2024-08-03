@@ -1,0 +1,30 @@
+server:
+  servlet:
+    encoding:
+      force-response: true
+spring:
+  profiles:
+    include:
+      - s3
+      - redis
+      - jwt
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+#   swagger 오류
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    org.hibernate.SQL: debug    # Logger
+    org.hibernate.type: trace   # Show Query Parameter

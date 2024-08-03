@@ -1,7 +1,6 @@
 package com.example.mes.user.entity;
 
 import com.example.mes.common.entity.BaseEntity;
-import com.example.mes.user.enums.SocialType;
 import com.example.mes.user.enums.UserRole;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -40,9 +39,6 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @Enumerated(EnumType.STRING)
-    private SocialType socialType; // KAKAO, NAVER, GOOGLE
-
     private String socialId; // 로그인한 소셜 타입의 식별자 값 (일반 로그인인 경우 null)
 
 
@@ -76,14 +72,13 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(Long id, String userName, String password, String email, String imageUrl, UserRole userRole, SocialType socialType, String socialId) {
+    public User(Long id, String userName, String password, String email, String imageUrl, UserRole userRole, String socialId) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.imageUrl = imageUrl;
         this.userRole = userRole;
-        this.socialType = socialType;
         this.socialId = socialId;
     }
 }
