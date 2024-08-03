@@ -128,9 +128,6 @@ export default function SignIn({ location }) {
             로그인
           </Typography>
           <br />
-          <Link href="http://restapi.mystudyproject.store:8080/oauth2/authorization/kakao">
-            <img style={{}} alt="kakao" src={KakaoBut} />
-          </Link>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
