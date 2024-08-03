@@ -2,12 +2,16 @@ server:
   servlet:
     encoding:
       force-response: true
+  port: 8081
 spring:
   profiles:
     include:
       - s3
       - redis
       - jwt
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
   jpa:
@@ -19,10 +23,7 @@ spring:
         format_sql: true
     database: oracle
     database-platform: org.hibernate.dialect.Oracle12cDialect
-#   swagger 오류
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ant_path_matcher
+
 
 logging:
   level:

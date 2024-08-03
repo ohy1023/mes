@@ -4,6 +4,7 @@ import com.example.mes.account.controller.AccountController;
 import com.example.mes.account.dto.AccountCreateRequest;
 import com.example.mes.account.dto.AccountDto;
 import com.example.mes.account.dto.AccountUpdateRequest;
+import com.example.mes.account.enums.TransactionType;
 import com.example.mes.account.service.AccountService;
 import com.example.mes.common.dto.MessageResponse;
 import com.example.mes.common.exception.MesAppException;
@@ -48,13 +49,23 @@ class AccountControllerTest {
         // given
         AccountDto dto1 = AccountDto.builder()
                 .id(1L)
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
         AccountDto dto2 = AccountDto.builder()
                 .id(2L)
-                .accountCode("196901")
-                .accountName("XX 제과")
+                .accountCode("10003")
+                .accountName("공주푸드")
+                .accountTel("010-5443-1254")
+                .transactionType(TransactionType.입고)
+                .businessNumber("123-42-42151")
+                .representativeName("김미지")
+                .note(null)
                 .build();
 
         List<AccountDto> response = new ArrayList<>();
@@ -81,14 +92,24 @@ class AccountControllerTest {
     void createItem() throws Exception {
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         AccountDto response = AccountDto.builder()
                 .id(1L)
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         given(accountService.createAccount(any(AccountCreateRequest.class)))
@@ -114,8 +135,13 @@ class AccountControllerTest {
     void createItemFail01() throws Exception {
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         // when & then
@@ -134,8 +160,13 @@ class AccountControllerTest {
     void updateAccount() throws Exception {
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("히피푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         MessageResponse response = MessageResponse.builder()
@@ -165,8 +196,13 @@ class AccountControllerTest {
     void updateAccountFail01() throws Exception {
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("196900")
-                .accountName("OO 제과")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         given(accountService.update(any(Long.class), any(AccountUpdateRequest.class)))

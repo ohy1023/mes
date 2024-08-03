@@ -41,7 +41,7 @@ public class AccountService {
                     throw new MesAppException(ACCOUNT_NOT_FOUND, ACCOUNT_NOT_FOUND.getMessage());
                 });
 
-        account.updateAccount(request.getAccountCode(), request.getAccountName());
+        account.updateAccount(request);
 
         return account.getId();
     }

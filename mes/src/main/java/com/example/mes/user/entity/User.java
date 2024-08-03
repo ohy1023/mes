@@ -39,9 +39,6 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private String socialId; // 로그인한 소셜 타입의 식별자 값 (일반 로그인인 경우 null)
-
-
     @PrePersist
     public void prePersist() {
         this.userRole = this.userRole == null ? USER : this.userRole;
@@ -72,13 +69,12 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(Long id, String userName, String password, String email, String imageUrl, UserRole userRole, String socialId) {
+    public User(Long id, String userName, String password, String email, String imageUrl, UserRole userRole) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.imageUrl = imageUrl;
         this.userRole = userRole;
-        this.socialId = socialId;
     }
 }

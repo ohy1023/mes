@@ -125,7 +125,7 @@ public class UserService {
                     throw new MesAppException(EMAIL_NOT_FOUND, EMAIL_NOT_FOUND.getMessage());
                 });
 
-        String tempKey = "CoinOne" + UUID.randomUUID();
+        String tempKey = "Mes" + UUID.randomUUID();
 
         String tempPassword = encoder.encode(tempKey);
 

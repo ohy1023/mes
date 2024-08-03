@@ -4,6 +4,7 @@ import com.example.mes.account.dto.AccountCreateRequest;
 import com.example.mes.account.dto.AccountDto;
 import com.example.mes.account.dto.AccountUpdateRequest;
 import com.example.mes.account.entity.Account;
+import com.example.mes.account.enums.TransactionType;
 import com.example.mes.account.repository.AccountRepository;
 import com.example.mes.account.service.AccountService;
 import com.example.mes.common.exception.MesAppException;
@@ -40,8 +41,13 @@ class AccountServiceTest {
 
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("code")
-                .accountName("name")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
 
@@ -61,8 +67,13 @@ class AccountServiceTest {
     void createAccountFail01() {
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("code")
-                .accountName("name")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         given(accountRepository.save(any()))
@@ -81,8 +92,13 @@ class AccountServiceTest {
 
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("update Code")
-                .accountName("update Name")
+                .accountCode("10002")
+                .accountName("new 이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
 
@@ -105,8 +121,13 @@ class AccountServiceTest {
     void updateAccountFail01() {
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("update Code")
-                .accountName("update Name")
+                .accountCode("10002")
+                .accountName("이버푸드")
+                .accountTel("010-2345-2515")
+                .transactionType(TransactionType.입고)
+                .businessNumber("220-51-23451")
+                .representativeName("허영돈")
+                .note(null)
                 .build();
 
         given(accountRepository.findById(any(Long.class)))
