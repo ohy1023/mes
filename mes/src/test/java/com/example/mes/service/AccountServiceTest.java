@@ -41,7 +41,6 @@ class AccountServiceTest {
 
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("10002")
                 .accountName("이버푸드")
                 .accountTel("010-2345-2515")
                 .transactionType(TransactionType.입고)
@@ -67,7 +66,6 @@ class AccountServiceTest {
     void createAccountFail01() {
         // given
         AccountCreateRequest request = AccountCreateRequest.builder()
-                .accountCode("10002")
                 .accountName("이버푸드")
                 .accountTel("010-2345-2515")
                 .transactionType(TransactionType.입고)
@@ -92,7 +90,6 @@ class AccountServiceTest {
 
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("10002")
                 .accountName("new 이버푸드")
                 .accountTel("010-2345-2515")
                 .transactionType(TransactionType.입고)
@@ -106,12 +103,11 @@ class AccountServiceTest {
                 .willReturn(Optional.of(account));
 
         // when
-        Long accountId = accountService.update(account.getId(), request);
+        AccountDto updatedAccount = accountService.update(account.getId(), request);
 
         // then
-        assertThat(accountId).isEqualTo(account.getId());
-        assertThat(account.getAccountCode()).isEqualTo(request.getAccountCode());
-        assertThat(account.getAccountName()).isEqualTo(request.getAccountName());
+        assertThat(updatedAccount.getId()).isEqualTo(account.getId());
+        assertThat(updatedAccount.getAccountName()).isEqualTo(request.getAccountName());
 
     }
 
@@ -121,8 +117,7 @@ class AccountServiceTest {
     void updateAccountFail01() {
         // given
         AccountUpdateRequest request = AccountUpdateRequest.builder()
-                .accountCode("10002")
-                .accountName("이버푸드")
+                .accountName("NEW 이버푸드")
                 .accountTel("010-2345-2515")
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
