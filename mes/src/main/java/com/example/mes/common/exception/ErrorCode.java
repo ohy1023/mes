@@ -20,6 +20,11 @@ public enum ErrorCode {
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED,"비밀번호가 틀렸습니다."),
 
     DATABASE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "DB에러"),
+
+    Method_Argument_Not_Valid_Exception(HttpStatus.BAD_REQUEST, ""),
+
+    Constraint_Violation_Exception(HttpStatus.BAD_REQUEST, ""),
+
     ;
 
     private HttpStatus status;

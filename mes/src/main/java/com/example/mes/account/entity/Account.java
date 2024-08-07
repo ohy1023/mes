@@ -64,7 +64,6 @@ public class Account extends BaseEntity {
     }
 
     public void updateAccount(AccountUpdateRequest accountUpdateRequest) {
-        this.accountCode = accountUpdateRequest.getAccountCode();
         this.accountName = accountUpdateRequest.getAccountName();
         this.accountTel = accountUpdateRequest.getAccountTel();
         this.transactionType = accountUpdateRequest.getTransactionType();

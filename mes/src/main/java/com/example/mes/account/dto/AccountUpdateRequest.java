@@ -2,48 +2,37 @@ package com.example.mes.account.dto;
 
 import com.example.mes.account.entity.Account;
 import com.example.mes.account.enums.TransactionType;
+import com.example.mes.common.aop.PhoneNumber;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Getter
 @NoArgsConstructor
 public class AccountUpdateRequest {
-    // 거래처 코드
-    private String accountCode;
-    // 거래처명
-    private String accountName;
-    // 거래처 전화번호
-    private String accountTel;
-    // 거래 유형
-    private TransactionType transactionType;
-    // 사업자 번호
-    private String businessNumber;
-    // 대표명
-    private String representativeName;
-    // 비고
-    private String note;
+
+    @NotBlank
+    private String accountName; // 거래처명
+    @PhoneNumber
+    private String accountTel; // 거래처 전화번호
+    @NotNull
+    private TransactionType transactionType; // 거래 유형
+    @NotBlank
+    private String businessNumber; // 사업자 번호
+    @NotBlank
+    private String representativeName; // 대표명
+    private String note; // 비고
 
     @Builder
-    public AccountUpdateRequest(String accountCode, String accountName, String accountTel, TransactionType transactionType, String businessNumber, String representativeName, String note) {
-        this.accountCode = accountCode;
+    public AccountUpdateRequest(String accountName, String accountTel, TransactionType transactionType, String businessNumber, String representativeName, String note) {
         this.accountName = accountName;
         this.accountTel = accountTel;
         this.transactionType = transactionType;
         this.businessNumber = businessNumber;
         this.representativeName = representativeName;
         this.note = note;
-    }
-
-    public Account toEntity() {
-        return Account.builder()
-                .accountCode(this.accountCode)
-                .accountName(this.accountName)
-                .accountTel(this.accountTel)
-                .transactionType(this.transactionType)
-                .businessNumber(this.businessNumber)
-                .representativeName(this.representativeName)
-                .note(this.note)
-                .build();
     }
 }

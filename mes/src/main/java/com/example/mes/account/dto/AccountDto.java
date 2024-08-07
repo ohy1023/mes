@@ -45,16 +45,6 @@ public class AccountDto {
 
     public static List<AccountDto> toDtoList(List<Account> accounts) {
         return accounts.stream().map(AccountDto::toAccountDto)
-//                AccountDto.builder()
-//                        .id(account.getId())
-//                        .accountCode(account.getAccountCode())
-//                        .accountName(account.getAccountName())
-//                        .accountTel(account.getAccountTel())
-//                        .transactionType(account.getTransactionType())
-//                        .businessNumber(account.getBusinessNumber())
-//                        .representativeName(account.getRepresentativeName())
-//                        .note(account.getNote())
-//                        .build())
                 .collect(Collectors.toList());
     }
 

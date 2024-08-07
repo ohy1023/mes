@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,28 +30,22 @@ public class AccountController {
 
     @ApiOperation(value = "거래처 등록")
     @PostMapping
-    public ResponseEntity<Response<AccountDto>> createAccount(@RequestBody AccountCreateRequest request) {
+    public ResponseEntity<Response<AccountDto>> createAccount(@Valid @RequestBody AccountCreateRequest request) {
         AccountDto account = accountService.createAccount(request);
         return ResponseEntity.ok().body(Response.success(account));
     }
 
     @ApiOperation(value = "거래처 수정")
     @PutMapping("/{accountId}")
-    public ResponseEntity<Response<MessageResponse>> updateAccount(@PathVariable Long accountId, @RequestBody AccountUpdateRequest request) {
-        Long id = accountService.update(accountId, request);
-        return ResponseEntity.ok().body(Response.success(MessageResponse.builder()
-                .id(id)
-                .message("거래처 수정 완료")
-                .build()));
+    public ResponseEntity<Response<AccountDto>> updateAccount(@PathVariable Long accountId, @RequestBody AccountUpdateRequest request) {
+        AccountDto updatedAccount = accountService.update(accountId, request);
+        return ResponseEntity.ok().body(Response.success(updatedAccount));
     }
 
     @ApiOperation(value = "거래처 삭제")
     @DeleteMapping("/{accountId}")
     public ResponseEntity<Response<MessageResponse>> deleteAccount(@PathVariable Long accountId) {
         Long id = accountService.delete(accountId);
-        return ResponseEntity.ok().body(Response.success(MessageResponse.builder()
-                .id(id)
-                .message("거래처 삭제 완료")
-                .build()));
+        return ResponseEntity.ok().body(Response.success(new MessageResponse(id, "거래처 삭제 완료")));
     }
 }

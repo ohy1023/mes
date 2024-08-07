@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.mes.common.exception.ErrorCode.*;
 
@@ -29,13 +30,14 @@ public class AccountService {
 
     @Transactional
     public AccountDto createAccount(AccountCreateRequest request) {
-        log.info("code:{}", request.getAccountCode());
+        String accountCode = generateAccountCode();
+        log.info("code:{}", accountCode);
         log.info("name:{}", request.getAccountName());
-        return AccountDto.toAccountDto(accountRepository.save(request.toEntity()));
+        return AccountDto.toAccountDto(accountRepository.save(request.toEntity(accountCode)));
     }
 
     @Transactional
-    public Long update(Long accountId, AccountUpdateRequest request) {
+    public AccountDto update(Long accountId, AccountUpdateRequest request) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> {
                     throw new MesAppException(ACCOUNT_NOT_FOUND, ACCOUNT_NOT_FOUND.getMessage());
@@ -43,7 +45,7 @@ public class AccountService {
 
         account.updateAccount(request);
 
-        return account.getId();
+        return AccountDto.toAccountDto(account);
     }
 
     @Transactional
@@ -56,5 +58,19 @@ public class AccountService {
         accountRepository.deleteById(account.getId());
 
         return account.getId();
+    }
+
+    private String generateAccountCode() {
+        String prefix = "ACCOUT";
+        Optional<Account> latestAccount = accountRepository.findFirstByOrderByCreatedAtDesc();
+        int sequence = 1;
+
+        if (latestAccount.isPresent()) {
+            String latestCode = latestAccount.get().getAccountCode();
+            String[] parts = latestCode.split("-");
+            sequence = Integer.parseInt(parts[1]) + 1;
+        }
+
+        return String.format("%s-%04d", prefix, sequence);
     }
 }
