@@ -18,7 +18,7 @@ import { ThemeProvider } from '@mui/material';
 import Logo from '../../../assets/appBar/logo.png';
 
 
-const pages = ['품목 단위 정보 등록', '설비 가동 현황', '사원 관리'];
+const pages = ['품목 단위 정보 등록', '거래처 관리', '사원 관리'];
 
 const customTheme = createTheme({
   palette: {
@@ -104,7 +104,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
                 <MenuItem key={pages[1]} onClick={() => {
                   handleCloseNavMenu()
-                  navigate('/temp')
+                  navigate('/transaction')
                 }}>
                   <Typography textAlign="center">{pages[1]}</Typography>
                 </MenuItem>
@@ -162,7 +162,7 @@ function ResponsiveAppBar() {
               </Button>
               <Button
                 key={pages[1]}
-                onClick={() => { navigate('/temp') }}
+                onClick={() => { navigate('/transaction') }}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 1 }}
               >
                 {pages[1]}

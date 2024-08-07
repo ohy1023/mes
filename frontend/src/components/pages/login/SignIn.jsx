@@ -12,7 +12,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
-import KakaoBut from '../../../assets/signIn/kakao_login_medium_wide.png'
 import { setCookie } from "../../../functions/cookie";
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../functions/GlobalState';
