@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../functions/GlobalState';
 import { removeCookie } from '../../../functions/cookie';
 import Api from '../../../functions/customApi';
+import styles from './AccountPopover.module.css'; // CSS 모듈 임포트
 
 const MENU_OPTIONS = [
   {
@@ -26,17 +26,15 @@ export default function AccountPopover() {
 
   const [account, setAccount] = useState([]);
 
-
   const getInfo = async () => {
     await Api.get("/api/v1/users")
       .then(function (response) {
-        console.log(response.data.result);
         setAccount(response.data.result);
       })
       .catch(function (err) {
         console.log(err);
         alert("유저 정보 조회 실패");
-      })
+      });
   };
 
   useEffect(() => {
@@ -74,20 +72,7 @@ export default function AccountPopover() {
     <>
       <IconButton
         onClick={handleOpen}
-        sx={{
-          p: 0,
-          ...(open && {
-            '&:before': {
-              zIndex: 1,
-              content: "''",
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
-            },
-          }),
-        }}
+        className={`${styles.avatarButton} ${open ? styles.avatarButtonOpen : ''}`}
       >
         <Avatar src={account.imageUrl} />
       </IconButton>
@@ -98,55 +83,44 @@ export default function AccountPopover() {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        PaperProps={{
-          sx: {
-            p: 0,
-            mt: 1.5,
-            ml: 0.75,
-            width: 180,
-            '& .MuiMenuItem-root': {
-              typography: 'body2',
-              borderRadius: 0.75,
-            },
-          },
-        }}
+        PaperProps={{ className: styles.popoverPaper }}
       >
-        <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
+        <Box className={styles.userInfoBox}>
+          <Typography variant="subtitle2" className={styles.userName}>
             {userName}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" className={styles.userEmail}>
             {email}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider className={styles.divider} />
 
         <Stack sx={{ p: 1 }}>
-          {/* {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
-              {option.label}
-            </MenuItem>
-          ))} */}
-          <MenuItem key={MENU_OPTIONS[0].label} onClick={() => {
-            navigate('/mypage')
-            handleClose()
-          }}>
+          <MenuItem
+            key={MENU_OPTIONS[0].label}
+            onClick={() => {
+              navigate('/mypage');
+              handleClose();
+            }}
+            className={styles.menuItem}
+          >
             {MENU_OPTIONS[0].label}
           </MenuItem>
         </Stack>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider className={styles.divider} />
 
-        <MenuItem onClick={() => {
-          logoutUser()
-          handleClose()
-        }} sx={{ m: 1 }}>
+        <MenuItem
+          onClick={() => {
+            logoutUser();
+            handleClose();
+          }}
+          className={`${styles.menuItem} ${styles.logoutMenuItem}`}
+        >
           로그아웃
         </MenuItem>
       </Popover>
     </>
   );
 }
-
-

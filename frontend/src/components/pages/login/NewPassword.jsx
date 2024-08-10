@@ -1,4 +1,4 @@
-import styles from "../Mypage/Mypage.module.css";
+import styles from "./NewPassword.module.css";  // 변경된 부분
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';

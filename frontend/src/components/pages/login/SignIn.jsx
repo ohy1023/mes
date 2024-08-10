@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,9 +18,9 @@ import { userState } from '../../../functions/GlobalState';
 import queryString from 'query-string';
 import Api from "../../../functions/customApi";
 import moment from "moment";
+import styles from './SignIn.module.css';  // CSS 파일 임포트
 
 const theme = createTheme();
-
 
 export default function SignIn({ location }) {
   const setUser = useSetRecoilState(userState);
@@ -29,23 +29,21 @@ export default function SignIn({ location }) {
   const paths = '/';
 
   useEffect(() => {
-
     const handleQuery = () => {
       const query = queryString.parse(search);
       const { accessToken, refreshToken, email } = query;
-      
 
       if (accessToken) {
-        const expires =  moment().add('3','days').toDate()
-        setCookie("access", accessToken,{paths,expires});
-        setCookie("refresh", refreshToken,{paths,expires});
+        const expires = moment().add('3', 'days').toDate();
+        setCookie("access", accessToken, { paths, expires });
+        setCookie("refresh", refreshToken, { paths, expires });
         localStorage.setItem("email", email);
-        sessionStorage.setItem("temp",0);
+        sessionStorage.setItem("temp", 0);
         setUser(localStorage.getItem("email"));
         getInfo();
         alert("로그인이 완료되었습니다.");
       }
-    }
+    };
 
     if (search) {
       handleQuery();
@@ -64,9 +62,8 @@ export default function SignIn({ location }) {
       .catch(function (err) {
         console.log(err);
         alert("유저 정보 조회 실패");
-      })
+      });
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,58 +73,45 @@ export default function SignIn({ location }) {
       password: data.get('password')
     };
 
-    onhandlePost(joinData)
-
+    onhandlePost(joinData);
   };
 
   const onhandlePost = async (data) => {
     const { email, password } = data;
     const postData = { email, password };
 
-
-
-    // post
     await axios
       .post('/api/v1/users/login', postData)
       .then(function (response) {
-        const expires =  moment().add('3','days').toDate()
-        setCookie("access", response.headers.get("Authorization"),{paths,expires});
-        setCookie("refresh", response.headers.get("Authorization-refresh"),{paths,expires});
+        const expires = moment().add('3', 'days').toDate();
+        setCookie("access", response.headers.get("Authorization"), { paths, expires });
+        setCookie("refresh", response.headers.get("Authorization-refresh"), { paths, expires });
         localStorage.setItem("email", email);
-        sessionStorage.setItem("temp",0);
+        sessionStorage.setItem("temp", 0);
         setUser(localStorage.getItem("email"));
         getInfo();
-        alert("로그인이 완료되었습니다.")
-        navigate('/');
+        alert("로그인이 완료되었습니다.");
+        navigate('/home');
       })
       .catch(function (err) {
         console.log(err);
-        alert("로그인에 실패했습니다.(이메일 또는 비밀번호를 확인해주세요.)")
+        alert("로그인에 실패했습니다.(이메일 또는 비밀번호를 확인해주세요.)");
       });
   };
 
   return (
-
-    <ThemeProvider theme={theme} >
-      <Container component="main" maxWidth="xs" >
+    <ThemeProvider theme={theme}>
+      <Container component="main" className={styles.mainContainer}>
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            paddingBottom :'11.8rem'
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Box className={styles.container}>
+          <Avatar className={styles.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
           <br />
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate className={styles.formBox}>
             <TextField
               margin="normal"
               required
@@ -171,8 +155,6 @@ export default function SignIn({ location }) {
           </Box>
         </Box>
       </Container>
-
     </ThemeProvider>
   );
-
 }

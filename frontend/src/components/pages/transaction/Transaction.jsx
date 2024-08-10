@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TransactionForm from './TransactionForm';
 import TransactionTable from './TransactionTable';
-import { Container, Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid } from '@mui/material';
+import { Container, Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Api from '../../../functions/customApi';
 
 const Transaction = () => {
@@ -14,6 +14,7 @@ const Transaction = () => {
     transactionType: '',
   });
   const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchTransactions();
@@ -71,6 +72,7 @@ const Transaction = () => {
             transaction.id === selectedTransaction.id ? selectedTransaction : transaction
           )
         );
+        setIsDialogOpen(false);
       })
       .catch(error => {
         console.error("There was an error updating the transaction!", error);
@@ -88,7 +90,7 @@ const Transaction = () => {
       note: '',
     };
     setSelectedTransaction(newTransaction);
-    setIsDetailVisible(true);
+    setIsDialogOpen(true);
   };
 
   const handleDeleteSelected = () => {
@@ -109,6 +111,10 @@ const Transaction = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFilters(prevFilters => ({ ...prevFilters, [name]: value }));
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
   };
 
   const filteredTransactions = transactions.filter(transaction =>
@@ -183,7 +189,21 @@ const Transaction = () => {
         selectedTransactions={selectedTransactions}
         onSelectAll={handleSelectAll}
       />
-      {isDetailVisible && selectedTransaction && (
+      <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle>거래처 생성/수정</DialogTitle>
+        <DialogContent>
+          <TransactionForm transaction={selectedTransaction} onChange={handleChange} onUpdate={handleUpdate} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="secondary">
+            취소
+          </Button>
+          <Button onClick={handleUpdate} color="primary">
+            저장
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {isDetailVisible && selectedTransaction && !isDialogOpen && (
         <TransactionForm transaction={selectedTransaction} onChange={handleChange} onUpdate={handleUpdate} />
       )}
     </Container>

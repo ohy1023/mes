@@ -16,19 +16,7 @@ import {
   Container,
 } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import styled from 'styled-components';
-
-// mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
-const FormHelperTexts = styled(FormHelperText)`
-  width: 100%;
-  padding-left: 16px;
-  font-weight: 700 !important;
-  color: #d32f2f !important;
-`;
-
-const Boxs = styled(Box)`
-  padding-bottom: 40px !important;
-`;
+import './Joinform.module.css';  // 추가된 CSS 파일 임포트
 
 const Joinform = () => {
   const theme = createTheme();
@@ -40,7 +28,6 @@ const Joinform = () => {
   const [registerError, setRegisterError] = useState('');
   const navigate = useNavigate();
 
-
   const handleAgree = (event) => {
     setChecked(event.target.checked);
   };
@@ -49,7 +36,6 @@ const Joinform = () => {
     const { email, userName, password } = data;
     const postData = { email, userName, password };
 
-    // post
     await axios
       .post('/api/v1/users/join', postData)
       .then(function (response) {
@@ -74,27 +60,22 @@ const Joinform = () => {
     };
     const { email, userName, password, rePassword } = joinData;
 
-    // 이메일 유효성 체크
     const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     if (!emailRegex.test(email)) setEmailError('올바른 이메일 형식이 아닙니다.');
     else setEmailError('');
 
-    // 비밀번호 유효성 체크
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
     if (!passwordRegex.test(password))
       setPasswordState('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!');
     else setPasswordState('');
 
-    // 비밀번호 같은지 체크
     if (password !== rePassword) setPasswordError('비밀번호가 일치하지 않습니다.');
     else setPasswordError('');
 
-    // 이름 유효성 검사
     const nameRegex = /^[가-힣a-zA-Z]+$/;
     if (!nameRegex.test(userName) || userName.length < 1) setNameError('올바른 이름을 입력해주세요.');
     else setNameError('');
 
-    // 회원가입 동의 체크
     if (!checked) alert('회원가입 약관에 동의해주세요.');
 
     if (
@@ -107,8 +88,6 @@ const Joinform = () => {
       onhandlePost(joinData);
     }
   };
-
-  
 
   return (
     <ThemeProvider theme={theme}>
@@ -126,7 +105,7 @@ const Joinform = () => {
           <Typography component="h1" variant="h5">
             회원가입
           </Typography>
-          <Boxs component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }} className="box">
             <FormControl component="fieldset" variant="standard">
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -140,7 +119,7 @@ const Joinform = () => {
                     label="이메일 주소"
                     error={emailError !== '' || false}
                   />
-                  <FormHelperTexts>{emailError}</FormHelperTexts>
+                  <FormHelperText className="form-helper-text">{emailError}</FormHelperText>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -153,7 +132,7 @@ const Joinform = () => {
                     error={passwordState !== '' || false}
                   />
                 </Grid>
-                <FormHelperTexts>{passwordState}</FormHelperTexts>
+                <FormHelperText className="form-helper-text">{passwordState}</FormHelperText>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -165,7 +144,7 @@ const Joinform = () => {
                     error={passwordError !== '' || false}
                   />
                 </Grid>
-                <FormHelperTexts>{passwordError}</FormHelperTexts>
+                <FormHelperText className="form-helper-text">{passwordError}</FormHelperText>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -176,7 +155,7 @@ const Joinform = () => {
                     error={nameError !== '' || false}
                   />
                 </Grid>
-                <FormHelperTexts>{nameError}</FormHelperTexts>
+                <FormHelperText className="form-helper-text">{nameError}</FormHelperText>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox onChange={handleAgree} color="primary" />}
@@ -190,11 +169,12 @@ const Joinform = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 size="large"
-              >회원가입
+              >
+                회원가입
               </Button>
             </FormControl>
-            <FormHelperTexts>{registerError}</FormHelperTexts>
-          </Boxs>
+            <FormHelperText className="form-helper-text">{registerError}</FormHelperText>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
