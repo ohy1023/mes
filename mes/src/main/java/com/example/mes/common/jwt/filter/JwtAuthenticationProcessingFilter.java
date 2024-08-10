@@ -2,8 +2,8 @@ package com.example.mes.common.jwt.filter;
 
 import com.example.mes.common.jwt.service.JwtService;
 import com.example.mes.common.jwt.util.PasswordUtil;
-import com.example.mes.user.entity.User;
-import com.example.mes.user.repository.UserRepository;
+import com.example.mes.domain.user.User;
+import com.example.mes.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

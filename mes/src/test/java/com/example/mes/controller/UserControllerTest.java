@@ -1,11 +1,10 @@
 package com.example.mes.controller;
 
 import com.example.mes.common.exception.MesAppException;
-import com.example.mes.user.controller.UserController;
-import com.example.mes.user.dto.UserJoinRequest;
-import com.example.mes.user.dto.UserJoinResponse;
-import com.example.mes.user.dto.UserLoginRequest;
-import com.example.mes.user.service.UserService;
+import com.example.mes.domain.user.dto.UserJoinRequest;
+import com.example.mes.domain.user.dto.UserJoinResponse;
+import com.example.mes.domain.user.dto.UserLoginRequest;
+import com.example.mes.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

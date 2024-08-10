@@ -1,11 +1,11 @@
 package com.example.mes.controller;
 
-import com.example.mes.account.controller.AccountController;
-import com.example.mes.account.dto.AccountCreateRequest;
-import com.example.mes.account.dto.AccountDto;
-import com.example.mes.account.dto.AccountUpdateRequest;
-import com.example.mes.account.enums.TransactionType;
-import com.example.mes.account.service.AccountService;
+import com.example.mes.domain.Address;
+import com.example.mes.domain.account.dto.AccountCreateRequest;
+import com.example.mes.domain.account.dto.AccountDto;
+import com.example.mes.domain.account.dto.AccountUpdateRequest;
+import com.example.mes.domain.account.TransactionType;
+import com.example.mes.service.AccountService;
 import com.example.mes.common.dto.MessageResponse;
 import com.example.mes.common.exception.MesAppException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,7 +55,7 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .address(new Address("디지털로 64길 15", "1203호", "05652"))
                 .build();
         AccountDto dto2 = AccountDto.builder()
                 .id(2L)
@@ -65,7 +65,7 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("123-42-42151")
                 .representativeName("김미지")
-                .note(null)
+                .address(new Address("디지털로 64길 16", "1204호", "05653"))
                 .build();
 
         List<AccountDto> response = new ArrayList<>();
@@ -97,7 +97,9 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         AccountDto response = AccountDto.builder()
@@ -108,7 +110,7 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .address(new Address("디지털로 64길 15", "1203호", "05652"))
                 .build();
 
         given(accountService.createAccount(any(AccountCreateRequest.class)))
@@ -139,7 +141,9 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         // when & then
@@ -163,7 +167,9 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         AccountDto response = AccountDto.builder()
@@ -172,7 +178,7 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .address(new Address("디지털로 64길 15", "1203호", "05652"))
                 .build();
 
         given(accountService.update(any(Long.class), any(AccountUpdateRequest.class)))
@@ -202,7 +208,9 @@ class AccountControllerTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         given(accountService.update(any(Long.class), any(AccountUpdateRequest.class)))

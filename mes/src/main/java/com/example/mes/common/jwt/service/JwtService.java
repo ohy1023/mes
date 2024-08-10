@@ -1,6 +1,6 @@
 package com.example.mes.common.jwt.service;
 
-import com.example.mes.user.repository.UserRepository;
+import com.example.mes.domain.user.repository.UserRepository;
 import io.jsonwebtoken.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.mes.fixture;
 
-import com.example.mes.account.entity.Account;
+import com.example.mes.domain.account.Account;
 
 public class AccountInfoFixture {
     public static Account get() {

@@ -1,8 +1,8 @@
 package com.example.mes.common.login.service;
 
 import com.example.mes.common.exception.MesAppException;
-import com.example.mes.user.entity.User;
-import com.example.mes.user.repository.UserRepository;
+import com.example.mes.domain.user.User;
+import com.example.mes.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,10 +1,9 @@
 package com.example.mes.controller;
 
 import com.example.mes.common.exception.MesAppException;
-import com.example.mes.item.controller.ItemController;
-import com.example.mes.item.dto.ItemAddRequest;
-import com.example.mes.item.dto.ItemDto;
-import com.example.mes.item.service.ItemService;
+import com.example.mes.domain.item.dto.ItemAddRequest;
+import com.example.mes.domain.item.dto.ItemDto;
+import com.example.mes.service.ItemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

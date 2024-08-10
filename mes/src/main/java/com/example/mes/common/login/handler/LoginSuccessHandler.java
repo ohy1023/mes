@@ -1,7 +1,7 @@
 package com.example.mes.common.login.handler;
 
 import com.example.mes.common.jwt.service.JwtService;
-import com.example.mes.user.repository.UserRepository;
+import com.example.mes.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

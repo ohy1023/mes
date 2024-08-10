@@ -7,7 +7,7 @@ import com.example.mes.common.login.filter.CustomJsonUsernamePasswordAuthenticat
 import com.example.mes.common.login.handler.LoginFailureHandler;
 import com.example.mes.common.login.handler.LoginSuccessHandler;
 import com.example.mes.common.login.service.LoginService;
-import com.example.mes.user.repository.UserRepository;
+import com.example.mes.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

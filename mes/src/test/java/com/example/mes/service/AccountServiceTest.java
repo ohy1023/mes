@@ -1,12 +1,11 @@
 package com.example.mes.service;
 
-import com.example.mes.account.dto.AccountCreateRequest;
-import com.example.mes.account.dto.AccountDto;
-import com.example.mes.account.dto.AccountUpdateRequest;
-import com.example.mes.account.entity.Account;
-import com.example.mes.account.enums.TransactionType;
-import com.example.mes.account.repository.AccountRepository;
-import com.example.mes.account.service.AccountService;
+import com.example.mes.domain.account.dto.AccountCreateRequest;
+import com.example.mes.domain.account.dto.AccountDto;
+import com.example.mes.domain.account.dto.AccountUpdateRequest;
+import com.example.mes.domain.account.Account;
+import com.example.mes.domain.account.TransactionType;
+import com.example.mes.domain.account.repository.AccountRepository;
 import com.example.mes.common.exception.MesAppException;
 import com.example.mes.fixture.AccountInfoFixture;
 import org.junit.jupiter.api.DisplayName;
@@ -46,7 +45,9 @@ class AccountServiceTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
 
@@ -71,7 +72,9 @@ class AccountServiceTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         given(accountRepository.save(any()))
@@ -95,7 +98,9 @@ class AccountServiceTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
 
@@ -122,7 +127,9 @@ class AccountServiceTest {
                 .transactionType(TransactionType.입고)
                 .businessNumber("220-51-23451")
                 .representativeName("허영돈")
-                .note(null)
+                .zipCode("05652")
+                .streetAdr("디지털로 64길 15")
+                .detailAdr("1203호")
                 .build();
 
         given(accountRepository.findById(any(Long.class)))
