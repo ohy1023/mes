@@ -4,16 +4,16 @@ server:
       force-response: true
   port: 8081
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
   profiles:
     include:
+      - mysql
       - s3
       - redis
       - jwt
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,9 +21,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    database: oracle
-    database-platform: org.hibernate.dialect.Oracle10gDialect
-
 
 logging:
   level:

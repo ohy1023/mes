@@ -48,11 +48,6 @@ public class SecurityConfig {
     private final RedisTemplate<String, String> redisTemplate;
     private final ObjectMapper objectMapper;
 
-    private final String[] SWAGGER = {
-            "/v3/api-docs",
-            "/swagger-resources/**", "/configuration/security", "/webjars/**",
-            "/swagger-ui.html", "/swagger/**", "/swagger-ui/**"};
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -71,7 +66,6 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers(SWAGGER).permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/users/join", "/api/v1/users/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/**").authenticated()

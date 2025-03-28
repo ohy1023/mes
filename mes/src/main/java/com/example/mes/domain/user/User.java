@@ -10,17 +10,13 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(name = "USERS")
+@Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "UPDATE USERS SET deleted_at = CURRENT_TIMESTAMP WHERE user_id = ?")
-@SequenceGenerator(
-        name = "USER_SEQ_GENERATOR",
-        sequenceName = "USER_SEQ", //매핑할 데이터베이스 시퀀스 이름
-        initialValue = 1, allocationSize = 1)
 public class User extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
@@ -38,7 +34,7 @@ public class User extends BaseEntity {
     @PrePersist
     public void prePersist() {
         this.userRole = this.userRole == null ? UserRole.USER : this.userRole;
-        this.imageUrl = this.imageUrl == null ? "https://ohy1023.s3.ap-northeast-2.amazonaws.com/basic.png" : this.imageUrl;
+        this.imageUrl = this.imageUrl == null ? "https://ficket-event-content.s3.ap-northeast-2.amazonaws.com/mutsa-sns/basic_profile.png" : this.imageUrl;
     }
 
     public User promoteRole(User user) {

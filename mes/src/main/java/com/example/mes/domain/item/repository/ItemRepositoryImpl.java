@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import static com.example.mes.item.entity.QItem.item;
+
+import static com.example.mes.domain.item.QItem.item;
 
 
 @Repository

@@ -54,20 +54,20 @@ public class ItemService {
     }
 
     @Transactional(readOnly = true)
-    public List<ItemDto> findItemByCon(String companyName,String itemType) {
-        return itemRepository.findCondition(companyName,itemType).stream().map(ItemDto::toItemDto).collect(Collectors.toList());
+    public List<ItemDto> findItemByCon(String companyName, String itemType) {
+        return itemRepository.findCondition(companyName, itemType).stream().map(ItemDto::toItemDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public ItemDto findDetailItem(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new MesAppException(ITEM_NOT_FOUND, ITEM_NOT_FOUND.getMessage()));
-        log.info("COMPANYNAME:{}",item.getCompanyName());
+        log.info("COMPANYNAME:{}", item.getCompanyName());
         return ItemDto.toItemDto(item);
     }
 
     @Transactional
-    public ItemDto updateItem(Long itemId, ItemUpdateRequest request) {
+    public Long updateItem(Long itemId, ItemUpdateRequest request) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new MesAppException(ITEM_NOT_FOUND, ITEM_NOT_FOUND.getMessage()));
         Item updatedItem = Item.builder()
@@ -79,7 +79,9 @@ public class ItemService {
                 .itemName(request.getItemName())
                 .build();
 
-        return ItemDto.toItemDto((itemRepository.save(updatedItem)));
+        Item savedItem = itemRepository.save(updatedItem);
+
+        return savedItem.getId();
     }
 
     @Transactional
